@@ -1,1 +1,1 @@
-# SQL-Finance-Domain-Data-Analytics-Solutions-Development-for-Atliq-Hardware
+# SQL-Finance-Domain-Data-Analytics-for-Atliq-Hardware
