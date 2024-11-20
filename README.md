@@ -6,7 +6,7 @@ Atliq Hardware is a prominent hardware production company. Their business has be
 
 ---
 
-## Task 1 - Croma India Gross Sales Report: Monthly Product Transactions
+##  Croma India Gross Sales Report: Monthly Product Transactions
 
 This task focuses on analyzing individual product-level sales for **Croma India** on a monthly basis for the fiscal year (FY) 2021. By leveraging **MySQL**, I extracted, transformed, and analyzed data to provide insights into customer transactions, product performance, and financial metrics.
 
@@ -77,6 +77,8 @@ WHERE customer_code = 90002002
 AND get_fiscal_year(date) = 2021;
 ```
 
+---
+
 #### Step 3: Filtering Data by Quarter
 
 To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter:
@@ -109,7 +111,7 @@ AND get_fiscal_year(date) = 2021
 AND get_fiscal_quarter(date) = 'Q4'
 ORDER BY date ASC;
 ```
-
+---
 
 #### Step 4: Joining Product and Sales Data
 
@@ -124,6 +126,8 @@ AND get_fiscal_year(s.date) = 2021
 AND get_fiscal_quarter(s.date) = 'Q4'
 ORDER BY date ASC;
 ```
+
+---
 
 #### Step 5: Adding Gross Price
 
@@ -141,7 +145,7 @@ AND get_fiscal_year(s.date) = 2021
 AND get_fiscal_quarter(s.date) = 'Q4'
 ORDER BY date ASC;
 ```
-
+---
 
 #### Step 6: Calculating Gross Price Total
 
