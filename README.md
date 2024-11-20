@@ -70,6 +70,7 @@ BEGIN
   DECLARE Fiscal_Year INT;
   SET Fiscal_Year = YEAR(DATE_ADD(date, INTERVAL 4 MONTH));
   RETURN fiscal_Year
+END
 ```
 
 Updated query using UDF:
