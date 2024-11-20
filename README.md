@@ -34,11 +34,14 @@ The analysis uses the following tables:
 
 ### Steps and Queries
 
-#### Step 1: Exploring Sales Data
-
-Inspect the monthly sales data and identify relevant customer records for **Croma India**:
 
 ```sql
+
+
+Step 1: Exploring Sales Data
+
+Inspecting the monthly sales data and identify relevant customer records for **Croma India**:
+
 SELECT * FROM fact_sales_monthly;
 SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
 
