@@ -1,4 +1,4 @@
-# SQL-Finance-Analytics-for-Atliq-Hardware-Gross Sales Report
+# SQL - Gross Sales Report (Finance Domain)
 
 ## Company Overview
 
