@@ -51,7 +51,8 @@ Result: Identified the customer code for Croma India: 90002002.
 
 Step 2: Filtering Sales Data for FY 2021
 
-To filter Croma India’s transactions for FY 2021, I wrote a function to calculate the fiscal year by adding 4 months to the transaction date:
+To filter Croma India’s transactions for FY 2021, I wrote a function
+to calculate the fiscal year by adding 4 months to the transaction date:
 
 
 SELECT * FROM fact_sales_monthly 
@@ -59,7 +60,19 @@ WHERE customer_code = 90002002
 AND YEAR(DATE_ADD(date, INTERVAL 4 MONTH)) = 2021;
 
 
-Optimization: Created a User-Defined Function (UDF) to simplify fiscal year filtering.
+Optimization: Created a User-Defined Function (UDF) to simplify fiscal year filtering:
+
+
+CREATE FUNCTION 'get_fiscal_year'(calendar_date date)
+  RETURNS integer
+  DETERMINISTIC
+BEGIN
+  DECLARE Fiscal_Year INT;
+  SET Fiscal_Year = YEAR(DATE_ADD(date, INTERVAL 4 MONTH));
+  RETURN fiscal_Year
+
+
+
 
 Updated query using UDF:
 
