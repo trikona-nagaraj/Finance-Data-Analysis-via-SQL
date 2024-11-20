@@ -40,16 +40,16 @@ The analysis uses the following tables:
 
 Step 1: Exploring Sales Data
 
-Inspecting the monthly sales data and identify relevant customer records for **Croma India**:
-
 SELECT * FROM fact_sales_monthly;
 SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
 
 Result: Identified the customer code for Croma India: 90002002.
 
+
 ---
 
-#### Step 2: Filtering Sales Data for FY 2021
+
+Step 2: Filtering Sales Data for FY 2021
 
 To filter Croma India’s transactions for FY 2021, I wrote a function to calculate the fiscal year by adding 4 months to the transaction date:
 
@@ -68,8 +68,10 @@ WHERE customer_code = 90002002
 AND get_fiscal_year(date) = 2021;
 
 
+---
 
-#### Step 3: Filtering Data by Quarter
+
+Step 3: Filtering Data by Quarter
 
 To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter.
 
@@ -83,8 +85,10 @@ AND get_fiscal_quarter(date) = 'Q4'
 ORDER BY date ASC;
 
 
+----
 
-#### Step 4: Joining Product and Sales Data
+
+Step 4: Joining Product and Sales Data
 
 To enrich the sales data with product names and variants, I joined the fact_sales_monthly table with dim_product:
 
@@ -98,7 +102,10 @@ AND get_fiscal_quarter(s.date) = 'Q4'
 ORDER BY date ASC;
 
 
-#### Step 5: Adding Gross Price
+---
+
+
+Step 5: Adding Gross Price
 
 I integrated gross price data by joining the fact_sales_monthly and fact_gross_price tables, using the fiscal year for unique price lookup
 
@@ -115,7 +122,10 @@ AND get_fiscal_quarter(s.date) = 'Q4'
 ORDER BY date ASC;
 
 
-#### Step 6: Calculating Gross Price Total
+---
+
+
+Step 6: Calculating Gross Price Total
 
 Finally, I calculated the gross price total for each transaction by multiplying the sold quantity by the gross price
 
