@@ -1,4 +1,4 @@
-# SQL - Gross Sales Report (Finance Domain)
+# SQL - Gross Sales Report (Finance Analytics - Part 1) 
 
 ## Company Overview
 
