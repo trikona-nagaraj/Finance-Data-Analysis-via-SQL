@@ -1,4 +1,4 @@
-# SQL-Finance-Analytics-for-Atliq-Hardware-Task-1
+# SQL-Finance-Analytics-for-Atliq-Hardware-Gross Sales Report
 
 ## Company Overview
 
