@@ -42,13 +42,9 @@ Inspect the monthly sales data and identify relevant customer records for **Crom
 SELECT * FROM fact_sales_monthly;
 SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
 
-
-
-SELECT * FROM fact_sales_monthly;
-SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
-
 Result: Identified the customer code for Croma India: 90002002.
 
+---
 
 #### Step 2: Filtering Sales Data for FY 2021
 
