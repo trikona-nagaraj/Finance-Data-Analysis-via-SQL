@@ -8,7 +8,10 @@ Atliq Hardware is a prominent hardware production company. Their business has be
 
 ##  Croma India Gross Sales Report: Monthly Product Transactions
 
-This task focuses on analyzing individual product-level sales for **Croma India** on a monthly basis for the fiscal year (FY) 2021. By leveraging **MySQL**, I extracted, transformed, and analyzed data to provide insights into customer transactions, product performance, and financial metrics.
+**Croma India** is expanding rapidly so Stakeholder’s need product level aggregation of metrics. Hence, Product owner brings requirement for gross sales report for customer CROMA. This report should have individual product level sales aggregated on monthly basis for FY 2021. This helps Stakeholders to track individual product sales and run further product analytics.
+
+By leveraging **MySQL**, I extracted, transformed, and analyzed data to provide insights into customer transactions, product performance, and financial metrics.
+
 
 ---
 
