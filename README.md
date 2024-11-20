@@ -86,10 +86,28 @@ AND get_fiscal_year(date) = 2021;
 
 Step 3: Filtering Data by Quarter
 
-To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter.
+To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter:
+
+
+CREATE FUNCTION 'get_fiscal_Quarter'(calendar_date date)
+  RETURNS CHAR(2)
+  DETERMINISTIC
+BEGIN
+  DECLARE m TINYINT;
+  DECLARE qtr CHAR(2);
+  SET m = MONTH(calendar_date);
+  CASE
+	      when m in (9,10,11) then set qtr = "Q1";
+        when m in (12,1,2)  then set qtr = "Q2";
+        when m in (3,4,5)   then set qtr = "Q3" ;
+        ELSE SET qtr ="Q4";
+ END CASE;
+RETURN qtr;
+END
+
+
 
 Query to extract Q4 transactions:
-
 
 SELECT * FROM fact_sales_monthly 
 WHERE customer_code = 90002002 
