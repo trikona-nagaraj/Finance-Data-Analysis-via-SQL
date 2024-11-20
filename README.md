@@ -1,4 +1,4 @@
-# SQL - Gross Sales Report (Finance Analytics - Part 1) 
+# SQL - Product Level Gross Sales Report (Finance Analytics - Part 1) 
 
 ## Company Overview
 
