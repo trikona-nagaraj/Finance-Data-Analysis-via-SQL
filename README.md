@@ -97,7 +97,7 @@ BEGIN
   DECLARE qtr CHAR(2);
   SET m = MONTH(calendar_date);
   CASE
-	      when m in (9,10,11) then set qtr = "Q1";
+        when m in (9,10,11) then set qtr = "Q1";
         when m in (12,1,2)  then set qtr = "Q2";
         when m in (3,4,5)   then set qtr = "Q3" ;
         ELSE SET qtr ="Q4";
