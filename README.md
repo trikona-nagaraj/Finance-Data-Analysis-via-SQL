@@ -32,6 +32,8 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 ### Techniques & Procedure followed
 
 
+---
+
 #### Requirement -1 
 
 Product level Gross Sales Report
@@ -49,8 +51,9 @@ Product level Gross Sales Report
 
 - Step 3: Filtered Data by Quarter
 
-        To analyze transactions by fiscal quarters,
-        another UDF is created to determine the fiscal quarter and later created a Query to extract Q4 transactions.
+        To analyze transactions by fiscal quarters, another UDF is created
+        to determine the fiscal quarter and later created a Query to extract
+        Q4 transactions.
 
 - Step 4: Joining Product and Sales Data
 
@@ -59,149 +62,58 @@ Product level Gross Sales Report
 
 - Step 5: Adding Gross Price
 
-        I integrated gross price data by joining the fact_sales_monthly and fact_gross_price tables,
-        using the fiscal year for unique price lookup
+        I integrated gross price data by joining the fact_sales_monthly
+        and fact_gross_price tables, using the fiscal year for unique price
+        lookup
 
 - Step 6: Calculating Gross Price Total
 
-        Finally, I calculated the gross price total for each transaction
-        by multiplying the sold quantity by the gross price
+        Finally, I calculated the gross price total for each
+        transaction by multiplying the sold quantity by the gross price
 
 
 ---
-### Techniques & Procedure followed
 
 
-#### Step 1: Exploring Sales Data
+#### Requirement -2
 
-```sql
-SELECT * FROM fact_sales_monthly;
-SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
+Monthly & Yearly Sales Report
 
-SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';     -- Identify customer code.
+       Analyze Croma India's financial performance by calculating and 
+       aggregating gross sales prices on a monthly and yearly basis for 
+       enhanced decision-making.
 
-```
+a) Monthly Sales Report
 
-Result: Identified the customer code for Croma India: 90002002.
-
----
-
-#### Step 2: Filtering Sales Data for FY 2021
-
-To filter Croma India’s transactions for FY 2021, I wrote a function
-to calculate the fiscal year by adding 4 months to the transaction date:
-
-```sql
-SELECT * FROM fact_sales_monthly 
-WHERE customer_code = 90002002 
-AND YEAR(DATE_ADD(date, INTERVAL 4 MONTH)) = 2021;         -- Filter for FY 2021.
-```
-
-Optimization: Created a User-Defined Function (UDF) to simplify fiscal year filtering:
-
-```sql
-CREATE FUNCTION 'get_fiscal_year'(calendar_date date)
-  RETURNS integer
-  DETERMINISTIC
-BEGIN
-  DECLARE Fiscal_Year INT;
-  SET Fiscal_Year = YEAR(DATE_ADD(date, INTERVAL 4 MONTH));        -- Add 4 months to determine fiscal year.
-  RETURN fiscal_Year
-END
-```
-
-Updated query using UDF:
-
-```sql
-SELECT * FROM fact_sales_monthly 
-WHERE customer_code = 90002002 
-AND get_fiscal_year(date) = 2021;
-```
-
----
-
-#### Step 3: Filtering Data by Quarter
-
-To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter:
-
-```sql
-CREATE FUNCTION 'get_fiscal_Quarter'(calendar_date date)
-  RETURNS CHAR(2)
-  DETERMINISTIC
-BEGIN
-  DECLARE m TINYINT;
-  DECLARE qtr CHAR(2);
-  SET m = MONTH(calendar_date);
-  CASE                                                     
-        when m in (9,10,11) then set qtr = "Q1";
-        when m in (12,1,2)  then set qtr = "Q2";
-        when m in (3,4,5)   then set qtr = "Q3" ;
-        ELSE SET qtr ="Q4";
- END CASE;
-RETURN qtr;
-END         
-```
+1. Calculated Gross Price per Transaction: Multiply sold_quantity by gross_price.
+2. Aggregated Monthly Sales: Sum gross sales grouped by the month.
 
 
-Query to extract Q4 transactions:
+- Step 1: Calculating Gross Price Total for Transactions
 
-```sql
-SELECT * FROM fact_sales_monthly 
-WHERE customer_code = 90002002 
-AND get_fiscal_year(date) = 2021 
-AND get_fiscal_quarter(date) = 'Q4'
-ORDER BY date ASC;                         -- Filter for Q4 and sort by date.
-```
----
+        The gross price for each transaction is calculated by multiplying
+        the sold quantity by the gross price. 
 
-#### Step 4: Joining Product and Sales Data
+- Step 2: Aggregating Monthly Gross Sales
 
-To enrich the sales data with product names and variants, I joined the fact_sales_monthly table with dim_product:
+        To provide a single row per month, gross sales data is aggregated
+        using the SUM function and grouped by the transaction date.
 
-```sql
-SELECT date, s.product_code, product, variant, sold_quantity
-FROM fact_sales_monthly s
-JOIN dim_product p ON s.product_code = p.product_code
-WHERE customer_code = 90002002 
-AND get_fiscal_year(s.date) = 2021 
-AND get_fiscal_quarter(s.date) = 'Q4'
-ORDER BY date ASC;                                 -- Add product details for Q4 transactions.
-```
+The result of this query provides insights into monthly sales trends and customer spending patterns.
 
----
 
-#### Step 5: Adding Gross Price
+b) Yearly Gross Sales Report
 
-I integrated gross price data by joining the fact_sales_monthly and fact_gross_price tables, using the fiscal year for unique price lookup
+1. Grouped Fiscal Year: Aggregated sales data using the get_fiscal_year() UDF.
+2. Summarized Total Gross Sales: Calculated the yearly gross sales to identify financial performance.
 
-```sql
-SELECT date, s.product_code, product, variant, sold_quantity, gross_price
-FROM fact_sales_monthly s
-JOIN dim_product p ON s.product_code = p.product_code
-JOIN fact_gross_price g 
-ON s.product_code = g.product_code 
-AND g.fiscal_year = get_fiscal_year(s.date)
-WHERE customer_code = 90002002 
-AND get_fiscal_year(s.date) = 2021 
-AND get_fiscal_quarter(s.date) = 'Q4'
-ORDER BY date ASC;                           -- Including gross price for each transaction.
-```
+- Step 1: Generating Yearly Sales Data
 
-#### Step 6: Calculating Gross Price Total
-
-Finally, I calculated the gross price total for each transaction by multiplying the sold quantity by the gross price
-
-```sql
-SELECT date, s.product_code, product, variant, sold_quantity, gross_price,              -- Calculating and displaying gross price total for each transaction.
-ROUND(sold_quantity * gross_price, 2) AS Gross_price_total
-FROM fact_sales_monthly s
-JOIN dim_product p ON s.product_code = p.product_code
-JOIN fact_gross_price g 
-ON s.product_code = g.product_code 
-AND g.fiscal_year = get_fiscal_year(s.date)
-WHERE customer_code = 90002002 
-AND get_fiscal_year(s.date) = 2021 
-AND get_fiscal_quarter(s.date) = 'Q4'
-ORDER BY date ASC;
-```
+      The fiscal year and total gross sales for that year are calculated by grouping
+      data by the fiscal year and summing the gross price totals.
   
+      Here, get_fiscal_year() is the UDF I created to simplify the code and minimize t
+      he complexity in code readability.
+
+This query provides a concise yearly summary of gross sales, allowing stakeholders to assess the company's financial growth over time.
+
