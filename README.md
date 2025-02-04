@@ -5,9 +5,6 @@
 Product Level Gross Sales Report (Finance Analytics)
 
 
-
-# SQL Task 1: Gross Sales Report Product Level (Finance Analytics)
-
 ## Summary
 
 Generate a gross sales report for **Croma India** to track product-level sales aggregated on a monthly basis for FY 2021. This aids stakeholders in analyzing product performance and financial metrics.
