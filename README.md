@@ -39,24 +39,29 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 - Step 1: Explored Sales Data and identified the customer code for Croma India: 90002002.
 - Step 2: Filtered Sales Data for FY 2021
 
-        To filter Croma India’s transactions for FY 2021, I wrote a function to calculate the fiscal year by adding 4 months to the transaction date. 
+        To filter Croma India’s transactions for FY 2021,
+        I have written a function to calculate the fiscal year by adding 4 months to the transaction date. 
         Optimized the code by Creating a User-Defined Function (UDF) to simplify fiscal year filtering.
 
 - Step 3: Filtered Data by Quarter
 
-        To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter and later created a Query to extract Q4 transactions.
+        To analyze transactions by fiscal quarters,
+        another UDF is created to determine the fiscal quarter and later created a Query to extract Q4 transactions.
 
 - Step 4: Joining Product and Sales Data
 
-        To enrich the sales data with product names and variants, I joined the fact_sales_monthly table with dim_product. 
+        To enrich the sales data with product names and variants,
+        I joined the fact_sales_monthly table with dim_product. 
 
 - Step 5: Adding Gross Price
 
-        I integrated gross price data by joining the fact_sales_monthly and fact_gross_price tables, using the fiscal year for unique price lookup
+        I integrated gross price data by joining the fact_sales_monthly and fact_gross_price tables,
+        using the fiscal year for unique price lookup
 
 - Step 6: Calculating Gross Price Total
 
-        Finally, I calculated the gross price total for each transaction by multiplying the sold quantity by the gross price
+        Finally, I calculated the gross price total for each transaction
+        by multiplying the sold quantity by the gross price
 
 
 ---
