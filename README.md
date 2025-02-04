@@ -14,6 +14,17 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 
 ---
 
+### Business Requirements
+
+- Gross Sales Report
+Generate a gross sales report for **Croma India** to track product-level sales aggregated on a monthly basis for FY 2021. This aids stakeholders in analyzing product performance and financial metrics.
+
+- Monthly & Yearly Sales Report
+- Market Badge on Total Quantity Sold
+
+
+---
+
 ### Task Objectives
 - Aggregate monthly sales for FY 2021.
 - Include product and variant details.
@@ -22,7 +33,9 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 
 ---
 
-### Dataset Overview
+### Dataset Origin & Description
+
+
 - **fact_sales_monthly**: Monthly sales data.
 - **dim_customer**: Customer details.
 - **dim_product**: Product and variant details.
@@ -30,7 +43,36 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 
 ---
 
-### Steps and Queries
+### Techniques & Procedure followed
+
+
+#### Gross Sales Report
+
+- Step 1: Explored Sales Data and identified the customer code for Croma India: 90002002.
+- Step 2: Filtered Sales Data for FY 2021
+
+To filter Croma India’s transactions for FY 2021, I wrote a function to calculate the fiscal year by adding 4 months to the transaction date. 
+Optimized the code by Creating a User-Defined Function (UDF) to simplify fiscal year filtering.
+
+- Step 3: Filtered Data by Quarter
+
+To analyze transactions by fiscal quarters, another UDF is created to determine the fiscal quarter and later created a Query to extract Q4 transactions.
+
+- Step 4: Joining Product and Sales Data
+
+To enrich the sales data with product names and variants, I joined the fact_sales_monthly table with dim_product. 
+
+- Step 5: Adding Gross Price
+
+I integrated gross price data by joining the fact_sales_monthly and fact_gross_price tables, using the fiscal year for unique price lookup
+
+- Step 6: Calculating Gross Price Total
+
+Finally, I calculated the gross price total for each transaction by multiplying the sold quantity by the gross price
+
+
+---
+### Techniques & Procedure followed
 
 
 #### Step 1: Exploring Sales Data
