@@ -14,7 +14,7 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 ### Business Requirements
 
 - Gross Sales Report
-Generate a gross sales report for **Croma India** to track product-level sales aggregated on a monthly basis for FY 2021. This aids stakeholders in analyzing product performance and financial metrics.
+    Generate a gross sales report for **Croma India** to track product-level sales aggregated on a monthly basis for FY 2021. This aids stakeholders in analyzing product performance and financial metrics.
 
 - Monthly & Yearly Sales Report
 - Market Badge on Total Quantity Sold
