@@ -19,14 +19,6 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 
 ---
 
-### Task Objectives
-- Aggregate monthly sales for FY 2021.
-- Include product and variant details.
-- Calculate gross price totals for transactions.
-- Use **MySQL User-Defined Functions (UDFs)** for fiscal year and quarter calculations.
-
----
-
 ### Dataset Origin & Description
 
 
