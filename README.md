@@ -2,7 +2,7 @@
 
 # Finance Data Analysis Using SQL
 
-Gross Sales Report Product Level (Finance Analytics)
+Product Level Gross Sales Report (Finance Analytics)
 
 
 
