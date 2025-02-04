@@ -117,3 +117,30 @@ b) Yearly Gross Sales Report
 
 This query provides a concise yearly summary of gross sales, allowing stakeholders to assess the company's financial growth over time.
 
+
+---
+
+
+#### Requirement -2
+
+Market Badge on Total Quantity Sold
+
+This requirment helps to determine a market badge based on total sold quantity for a specific market and fiscal year.  
+
+- **Gold Badge**: Total sold quantity > 5 million.  
+- **Silver Badge**: Total sold quantity ≤ 5 million.
+
+
+#### solution:
+
+        Create a stored procedure to determine a market badge based 
+        on total sold quantity for a specific market and fiscal year.  
+  
+
+### Inputs and Outputs
+- **Inputs**:
+  - in_market : Market name (default is "India").
+  - in_fiscal_year: Fiscal year for analysis.
+- **Output**:
+  - out_market_badge: Market badge (Gold or Silver).
+
