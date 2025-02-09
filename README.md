@@ -49,16 +49,17 @@ The following datasets were used:
 
 Product level Gross Sales Report
 
-        Generating a gross sales report for **Croma India** to track product-level sales aggregated 
-        on a monthly basis for FY 2021. 
+        Generating a gross sales report for **Croma India** to track product-level 
+        sales aggregated on a monthly basis for FY 2021. 
         This aids stakeholders in analyzing product performance and financial metrics.
 
 - Step 1: Explored Sales Data and identified the customer code for Croma India: 90002002.
   
 - Step 2: Filtered Sales Data for FY 2021
 
-        To filter Croma India’s transactions for FY 2021,
-        I have written a User Defined function (UDF) to calculate the fiscal year by adding 4 months to the transaction date.
+        To filter Croma India’s transactions for FY 2021, I have written a
+        User Defined function (UDF) to calculate the fiscal year by adding 4 months
+        to the transaction date.
 
 - Step 3: Filtered Data by Quarter
 
@@ -102,8 +103,8 @@ a) Monthly Sales Report
 
 - Step 2: Aggregated Monthly Gross Sales
 
-        To provide a single row individual month (ex: jan, feb etc.,) gross sales data is aggregated
-        using the SUM function and grouped by the transaction date.
+        To provide a single row individual month (ex: jan, feb etc.,) gross sales
+        data is aggregated using the SUM function and grouped by the transaction date.
 
 The result of this query provides insights into monthly sales trends and customer spending patterns.
 
