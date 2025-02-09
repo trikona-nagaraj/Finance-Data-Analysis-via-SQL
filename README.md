@@ -170,6 +170,6 @@ offering clear insights into sales trends.
 
 ### Conclusion
 
-This project shows how SQL can be used to create useful financial reports for business decisions. By using User-Defined Functions (UDFs), stored procedures, and SQL joins, we built three important reports—Product-Level Gross Sales Report, Monthly & Yearly Sales Report, and Market Badge Classification—to help Atliq Company analyze sales performance.
+This project shows how SQL can be used to create useful financial reports for business decisions. By using User-Defined Functions (UDFs), stored procedures, and SQL joins, I built three important reports—Product-Level Gross Sales Report, Monthly & Yearly Sales Report, and Market Badge Classification—to help Atliq Company analyze sales performance.
 
 With these reports, stakeholders can easily track sales trends, product performance, and market growth. The methods used in this project provide a simple and effective way to analyze financial data, helping businesses make better decisions based on data.
