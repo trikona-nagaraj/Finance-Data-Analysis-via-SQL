@@ -16,6 +16,7 @@ We are dealing with a scenario in Atliq Company, where stakeholders have observe
 - Product-Level Gross Sales Report
 - Monthly & Yearly Sales Report
 - Market Badge on Total Quantity Sold
+  
 These reports will help stakeholders run further product analytics in Excel.
 
 The Product-Level Gross Sales Report should contain the following fields:
