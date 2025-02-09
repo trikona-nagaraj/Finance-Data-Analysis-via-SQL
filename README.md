@@ -53,52 +53,12 @@ Product level Gross Sales Report
         on a monthly basis for FY 2021. 
         This aids stakeholders in analyzing product performance and financial metrics.
 
-- Step 1: Exploring Sales Data and identified the customer code for Croma India: 90002002.
-
-```sql
-SELECT * FROM fact_sales_monthly;
-SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
-
-SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';     -- Identify customer code.
-
-```
-
+- Step 1: Explored Sales Data and identified the customer code for Croma India: 90002002.
   
 - Step 2: Filtered Sales Data for FY 2021
 
         To filter Croma India’s transactions for FY 2021,
         I have written a User Defined function (UDF) to calculate the fiscal year by adding 4 months to the transaction date.
-
-```sql
-
-SELECT * FROM fact_sales_monthly 
-WHERE customer_code = 90002002 
-AND YEAR(DATE_ADD(date, INTERVAL 4 MONTH)) = 2021;         -- Filter for FY 2021.
-
-```
-
-
-User-Defined Function (UDF) to simplify fiscal year filtering:
-
-```sql
-CREATE FUNCTION 'get_fiscal_year'(calendar_date date)
-  RETURNS integer
-  DETERMINISTIC
-BEGIN
-  DECLARE Fiscal_Year INT;
-  SET Fiscal_Year = YEAR(DATE_ADD(date, INTERVAL 4 MONTH));        -- Add 4 months to determine fiscal year.
-  RETURN fiscal_Year
-END
-```
-
-Updated query using UDF:
-
-```sql
-SELECT * FROM fact_sales_monthly 
-WHERE customer_code = 90002002 
-AND get_fiscal_year(date) = 2021;
-```
-
 
 - Step 3: Filtered Data by Quarter
 
@@ -119,7 +79,7 @@ AND get_fiscal_year(date) = 2021;
 
 - Step 6: Calculating Gross Price Total
 
-        Finally, I calculated the gross price total for each
+        Finally, I computed the gross price total for each
         transaction by multiplying the sold quantity by the gross price
 
 
@@ -130,24 +90,19 @@ AND get_fiscal_year(date) = 2021;
 
 Monthly & Yearly Sales Report
 
-       Analyze Croma India's financial performance by calculating and 
-       aggregating gross sales prices on a monthly and yearly basis for 
-       enhanced decision-making.
+       To Analyze Croma India's financial performance, calculating and 
+       aggregating gross sales prices on a monthly and yearly basis.
 
 a) Monthly Sales Report
 
-1. Calculated Gross Price per Transaction: Multiply sold_quantity by gross_price.
-2. Aggregated Monthly Sales: Sum gross sales grouped by the month.
-
-
-- Step 1: Calculating Gross Price Total for Transactions
+- Step 1: Calculated Gross Price Total per Transaction
 
         The gross price for each transaction is calculated by multiplying
         the sold quantity by the gross price. 
 
-- Step 2: Aggregating Monthly Gross Sales
+- Step 2: Aggregated Monthly Gross Sales
 
-        To provide a single row per month, gross sales data is aggregated
+        To provide a single row individual month (ex: jan, feb etc.,) gross sales data is aggregated
         using the SUM function and grouped by the transaction date.
 
 The result of this query provides insights into monthly sales trends and customer spending patterns.
@@ -155,19 +110,18 @@ The result of this query provides insights into monthly sales trends and custome
 
 b) Yearly Gross Sales Report
 
-1. Grouped Fiscal Year: Aggregated sales data using the get_fiscal_year() UDF.
-2. Summarized Total Gross Sales: Calculated the yearly gross sales to identify financial performance.
 
-- Step 1: Generating Yearly Sales Data
+- Step 1: Calculated Gross Price Total per Fiscal Year
 
-      The fiscal year and total gross sales for that year are calculated by grouping
-      data by the fiscal year and summing the gross price totals.
+      The fiscal year for each transaction is determined using the `get_fiscal_year()` UDF,
+      and the total gross sales for that year are calculated by summing the gross price totals.  
+
+- Step 2: Aggregated Yearly Gross Sales
+
+      To provide a single-row yearly gross sales summary, data is aggregated using the `SUM`
+      function and grouped by the fiscal year.
   
-      Here, get_fiscal_year() is the UDF I created to simplify the code and minimize t
-      he complexity in code readability.
-
-This query provides a concise yearly summary of gross sales, allowing stakeholders to assess the company's financial growth over time.
-
+The result of this query provides insights into yearly sales trends and overall financial performance.
 
 ---
 
@@ -176,17 +130,21 @@ This query provides a concise yearly summary of gross sales, allowing stakeholde
 
 Market Badge on Total Quantity Sold
 
-This requirment helps to determine a market badge based on total sold quantity for a specific market and fiscal year.  
-
-- **Gold Badge**: Total sold quantity > 5 million.  
-- **Silver Badge**: Total sold quantity ≤ 5 million.
+This requirment helps to determine a market badge based on total sold quantity for a 
+specific market and fiscal year.  
 
 
-#### solution:
+- Step 1: Defining Market Badge Criteria
 
-        Create a stored procedure to determine a market badge based 
-        on total sold quantity for a specific market and fiscal year.  
-  
+   The total quantity sold is evaluated to determine the appropriate badge:  
+ - **Gold Badge**: Total sold quantity > 5 million.  
+ - **Silver Badge**: Total sold quantity ≤ 5 million.  
+
+- Step 2:
+
+A stored procedure is created to classify markets based on their total sold quantity 
+in a given fiscal year.  
+   
 
 ### Inputs and Outputs
 - **Inputs**:
@@ -195,3 +153,5 @@ This requirment helps to determine a market badge based on total sold quantity f
 - **Output**:
   - out_market_badge: Market badge (Gold or Silver).
 
+This implementation provides a structured way to categorize markets based on sales performance,
+offering clear insights into sales trends.
