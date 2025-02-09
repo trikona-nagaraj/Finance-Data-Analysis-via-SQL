@@ -6,21 +6,33 @@
 
 ## Summary
 
-Generate a gross sales report for **Croma India** to track product-level sales aggregated on a monthly basis for FY 2021. This aids stakeholders in analyzing product performance and financial metrics.
+This project focuses on achieving three key requirements placed by stakeholders of a firm. To meet these requirements, SQL was used to generate three reports by leveraging User-Defined Functions (UDFs), stored procedures, and joins. Finally, the reports were delivered in Excel format to the stakeholders.
 
 ---
 
 ### Business Requirements
 
-- Product level Gross Sales Report
-- Monthly & Yearly Sales Report
-- Market Badge on Total Quantity Sold
+We are dealing with a scenario in Atliq Company, where stakeholders have observed that one of their markets, Croma India, is expanding rapidly. As a result, they require product-level aggregation of metrics to track individual product sales. The stakeholders need three key reports to analyze sales performance effectively:
+Product-Level Gross Sales Report
+Monthly & Yearly Sales Report
+Market Badge on Total Quantity Sold
+These reports will help stakeholders run further product analytics in Excel.
+
+The Product-Level Gross Sales Report should contain the following fields:
+Month
+Product Name
+Variant
+Sold Quantity
+Gross Price per Item
+Gross Price Total
 
 
 ---
 
 ### Dataset Origin & Description
 
+The data used in this project is not public and is part of an organization's internal records. With the consent of the company, this data is being used to perform this sample project for analyzing and producing the reports. Therefore, the dataset is not provided in this repository. However, you can follow the detailed procedure and steps outlined in the repository to understand how the analysis was conducted.
+The following datasets were used:
 
 - **fact_sales_monthly**: Monthly sales data.
 - **dim_customer**: Customer details.
@@ -31,23 +43,62 @@ Generate a gross sales report for **Croma India** to track product-level sales a
 
 ### Techniques & Procedure followed
 
-
 ---
 
 #### Requirement -1 
 
 Product level Gross Sales Report
 
-        Generate a gross sales report for **Croma India** to track product-level sales aggregated 
+        Generating a gross sales report for **Croma India** to track product-level sales aggregated 
         on a monthly basis for FY 2021. 
         This aids stakeholders in analyzing product performance and financial metrics.
 
-- Step 1: Explored Sales Data and identified the customer code for Croma India: 90002002.
+- Step 1: Exploring Sales Data and identified the customer code for Croma India: 90002002.
+
+```sql
+SELECT * FROM fact_sales_monthly;
+SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';
+
+SELECT * FROM dim_customer WHERE customer LIKE '%Croma%';     -- Identify customer code.
+
+```
+
+  
 - Step 2: Filtered Sales Data for FY 2021
 
         To filter Croma India’s transactions for FY 2021,
-        I have written a function to calculate the fiscal year by adding 4 months to the transaction date. 
-        Optimized the code by Creating a User-Defined Function (UDF) to simplify fiscal year filtering.
+        I have written a User Defined function (UDF) to calculate the fiscal year by adding 4 months to the transaction date.
+
+```sql
+
+SELECT * FROM fact_sales_monthly 
+WHERE customer_code = 90002002 
+AND YEAR(DATE_ADD(date, INTERVAL 4 MONTH)) = 2021;         -- Filter for FY 2021.
+
+```
+
+
+User-Defined Function (UDF) to simplify fiscal year filtering:
+
+```sql
+CREATE FUNCTION 'get_fiscal_year'(calendar_date date)
+  RETURNS integer
+  DETERMINISTIC
+BEGIN
+  DECLARE Fiscal_Year INT;
+  SET Fiscal_Year = YEAR(DATE_ADD(date, INTERVAL 4 MONTH));        -- Add 4 months to determine fiscal year.
+  RETURN fiscal_Year
+END
+```
+
+Updated query using UDF:
+
+```sql
+SELECT * FROM fact_sales_monthly 
+WHERE customer_code = 90002002 
+AND get_fiscal_year(date) = 2021;
+```
+
 
 - Step 3: Filtered Data by Quarter
 
