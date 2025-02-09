@@ -144,17 +144,18 @@ specific market and fiscal year.
 
 - Step 1: Defining Market Badge Criteria
 
-   The total quantity sold is evaluated to determine the appropriate badge:  
- - **Gold Badge**: Total sold quantity > 5 million.  
- - **Silver Badge**: Total sold quantity ≤ 5 million.  
+   The total quantity sold is evaluated to determine the appropriate badge:
+  
+  **Gold Badge**: Total sold quantity > 5 million.
+  
+  **Silver Badge**: Total sold quantity ≤ 5 million.  
 
-- Step 2:
-
-A stored procedure is created to classify markets based on their total sold quantity 
+- Step 2: A stored procedure is created to classify markets based on their total sold quantity 
 in a given fiscal year.  
    
 
 ### Inputs and Outputs
+
 - **Inputs**:
   - in_market : Market name (default is "India").
   - in_fiscal_year: Fiscal year for analysis.
