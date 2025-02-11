@@ -18,15 +18,10 @@ These reports will help stakeholders run further product analytics in Excel.
 The Product-Level Gross Sales Report should contain the following fields:
 
 Month
-
 Product Name
-
 Variant
-
 Sold Quantity
-
 Gross Price per Item
-
 Gross Price Total
 
 
