@@ -2,10 +2,6 @@
 
 # Finance Data Analysis Using SQL
 
-
-
-## Summary
-
 This project focuses on achieving three key requirements placed by stakeholders of a firm. To meet these requirements, SQL was used to generate three reports by leveraging User-Defined Functions (UDFs), stored procedures, and joins. Finally, the reports were delivered in Excel format to the stakeholders.
 
 ---
