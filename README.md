@@ -8,7 +8,7 @@ This project focuses on achieving three key requirements placed by stakeholders 
 
 ### Business Requirements
 
-We are dealing with a scenario in Atliq Company, where stakeholders have observed that one of their markets, Croma India, is expanding rapidly. As a result, they require product-level aggregation of metrics to track individual product sales. The stakeholders need three key reports to analyze sales performance effectively:
+Present project deals with a scenario in Atliq Company, where stakeholders have observed one of their markets; Croma India, is expanding rapidly. As a result, they require product-level aggregation of metrics to track individual product sales. The stakeholders need three key reports to analyze sales performance effectively:
 - Product-Level Gross Sales Report
 - Monthly & Yearly Sales Report
 - Market Badge on Total Quantity Sold
